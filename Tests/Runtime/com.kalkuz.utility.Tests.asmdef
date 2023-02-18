@@ -1,0 +1,17 @@
+{
+    "name": "com.kalkuz.utility.Tests",
+    "rootNamespace": "KalkuzSystems.Utility.Tests",
+    "references": [
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:fc6a7c817efe858419ac5f8d152fb548"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

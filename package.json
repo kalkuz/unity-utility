@@ -1,0 +1,23 @@
+﻿{
+  "name": "com.kalkuz.utility",
+  "version": "0.0.1",
+  "displayName": "Kalkuz Utility",
+  "description": "A utility library for most operations in Unity.",
+  "category": "Tools",
+  "unity": "2021.3",
+  "unityRelease": "9f1",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "dependencies": {
+  },
+  "keywords": [
+    "scripts",
+    "tools"
+  ],
+  "author": {
+    "name": "Oğuzhan Kalkuz",
+    "email": "oguzhan@kalkuz.me",
+    "url": ""
+  }
+}

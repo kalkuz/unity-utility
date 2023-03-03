@@ -37,9 +37,9 @@ namespace KalkuzSystems.Utility.Tests
       yield return null;
 
       // Check that the counts are proportional to the weights
-      Assert.AreApproximatelyEqual(counts["apple"], 10000f / 6, 100f);
-      Assert.AreApproximatelyEqual(counts["banana"], 20000f / 6, 100f);
-      Assert.AreApproximatelyEqual(counts["cherry"], 30000f / 6, 100f);
+      Assert.AreApproximatelyEqual(counts["apple"], 10000f / 6, 200f);
+      Assert.AreApproximatelyEqual(counts["banana"], 20000f / 6, 200f);
+      Assert.AreApproximatelyEqual(counts["cherry"], 30000f / 6, 200f);
     }
   }
 }

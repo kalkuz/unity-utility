@@ -11,6 +11,7 @@ namespace KalkuzSystems.Utility
 
     public void OnBeforeSerialize()
     {
+      elements ??= new List<SerializableKeyValuePair<TKey, TValue>>();
       elements.Clear();
 
       foreach (var kvp in this)

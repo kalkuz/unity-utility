@@ -9,6 +9,7 @@ namespace KalkuzSystems.Utility
   [Serializable]
   public class GraphEdge<T>
   {
+
     /// <summary>
     /// From is the vertex that this edge is starting from.
     /// </summary>
@@ -202,12 +203,22 @@ namespace KalkuzSystems.Utility
     {
       return $"Graph Edge from {from} to {to} with weight {weight}";
     }
+    
+    protected bool Equals(GraphEdge<T> other)
+    {
+      return Equals(from, other.from) && Equals(to, other.to) && weight.Equals(other.weight) && isLoop == other.isLoop && Equals(undirectedSibling, other.undirectedSibling) && Equals(onWeightChanged, other.onWeightChanged);
+    }
 
     public override bool Equals(object obj)
     {
-      if (obj == null) return false;
-      if (obj.GetType() != typeof(GraphEdge<T>)) return false;
-      return ((GraphEdge<T>)obj).from == from && ((GraphEdge<T>)obj).to == to;
+      if (ReferenceEquals(null, obj)) return false;
+      if (ReferenceEquals(this, obj)) return true;
+      return obj.GetType() == this.GetType() && Equals((GraphEdge<T>)obj);
+    }
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(from, to, weight, isLoop, undirectedSibling, onWeightChanged);
     }
 
     public static bool operator ==(GraphEdge<T> a, GraphEdge<T> b)

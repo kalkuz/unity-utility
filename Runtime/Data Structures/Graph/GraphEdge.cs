@@ -12,22 +12,27 @@ namespace KalkuzSystems.Utility
     /// <summary>
     /// From is the vertex that this edge is starting from.
     /// </summary>
-    private readonly GraphVertex<T> from;
-    
+    private GraphVertex<T> from;
+
     /// <summary>
     /// To is the vertex that this edge is ending at.
     /// </summary>
-    private readonly GraphVertex<T> to;
-    
+    private GraphVertex<T> to;
+
     /// <summary>
     /// Weight is the weight of this edge. It is used for pathfinding.
     /// </summary>
     private float weight;
-    
+
     /// <summary>
     /// IsLoop is true if the edge is starting and ending at the same vertex.
     /// </summary>
     private bool isLoop;
+
+    /// <summary>
+    /// UndirectedSibling is the other edge that is connected to the same two vertices when the graph created undirected edges.
+    /// </summary>
+    private GraphEdge<T> undirectedSibling;
 
     /// <summary>
     /// OnWeightChanged is called when the weight of this edge is changed.
@@ -38,10 +43,10 @@ namespace KalkuzSystems.Utility
 
     /// <inheritdoc cref="from"/>
     public GraphVertex<T> From => from;
-    
+
     /// <inheritdoc cref="to"/>
     public GraphVertex<T> To => to;
-    
+
     /// <inheritdoc cref="weight"/>
     public float Weight
     {
@@ -55,6 +60,13 @@ namespace KalkuzSystems.Utility
 
     /// <inheritdoc cref="isLoop"/>
     public bool IsLoop => isLoop;
+
+    /// <inheritdoc cref="undirectedSibling"/>
+    public GraphEdge<T> UndirectedSibling
+    {
+      get => undirectedSibling;
+      set => undirectedSibling = value;
+    }
 
     /// <inheritdoc cref="onWeightChanged"/>
     public Action<GraphEdge<T>> OnWeightChanged
@@ -175,10 +187,15 @@ namespace KalkuzSystems.Utility
       }
 
       to.RemoveEdge(this);
-      if (!to.IncomingEdges.Exists(edge => edge.IsConnectedTo(from)))
+      if (!to.OutgoingEdges.Exists(edge => edge.IsConnectedTo(from)))
       {
         to.RemoveNeighbor(from);
       }
+
+      from = null;
+      to = null;
+      
+      undirectedSibling = null;
     }
 
     public override string ToString()
@@ -191,11 +208,6 @@ namespace KalkuzSystems.Utility
       if (obj == null) return false;
       if (obj.GetType() != typeof(GraphEdge<T>)) return false;
       return ((GraphEdge<T>)obj).from == from && ((GraphEdge<T>)obj).to == to;
-    }
-
-    public override int GetHashCode()
-    {
-      return from.GetHashCode() ^ to.GetHashCode();
     }
 
     public static bool operator ==(GraphEdge<T> a, GraphEdge<T> b)

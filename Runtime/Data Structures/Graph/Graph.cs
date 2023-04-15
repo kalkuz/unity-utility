@@ -126,7 +126,7 @@ namespace KalkuzSystems.Utility
     /// <param name="weight">The weight of the edge.</param>
     /// <param name="onWeightChanged">Event called when the weight of the edge is changed.</param>
     /// <returns>The edges that were added.</returns>
-    public GraphEdge<T>[] AddUndirectedEdge(
+    public (GraphEdge<T>, GraphEdge<T>) AddUndirectedEdge(
       GraphVertex<T> from,
       GraphVertex<T> to,
       float weight = 1f,
@@ -135,7 +135,11 @@ namespace KalkuzSystems.Utility
     {
       var edge1 = AddDirectedEdge(from, to, weight, onWeightChanged);
       var edge2 = AddDirectedEdge(to, from, weight, onWeightChanged);
-      return new[] { edge1, edge2 };
+      
+      edge1.UndirectedSibling = edge2;
+      edge2.UndirectedSibling = edge1;
+      
+      return (edge1, edge2);
     }
     
     /// <summary>

@@ -179,6 +179,16 @@ namespace KalkuzSystems.Utility
     }
     
     /// <summary>
+    /// Checks if this vertex has a neighbor.
+    /// </summary>
+    /// <param name="vertex">The neighbor to check.</param>
+    /// <returns>True if the neighbor exists, false otherwise.</returns>
+    public bool HasNeighbor(GraphVertex<T> vertex)
+    {
+      return neighbors.Contains(vertex);
+    }
+    
+    /// <summary>
     /// Adds an edge to this vertex. If the edge already exists, nothing happens.
     /// After adding the edge, neighbors should be added manually.
     /// </summary>
@@ -214,19 +224,22 @@ namespace KalkuzSystems.Utility
     /// <param name="edge">The edge to remove.</param>
     public void RemoveEdge(GraphEdge<T> edge)
     {
-      if (!incomingEdges.Contains(edge)) return;
-      incomingEdges.Remove(edge);
+      if (incomingEdges.Contains(edge))
+      {
+        incomingEdges.Remove(edge);
+      }
+      
+      if (outgoingEdges.Contains(edge))
+      {
+        outgoingEdges.Remove(edge);
+      }
+      
+      if (loopingEdges.Contains(edge))
+      {
+        loopingEdges.Remove(edge);
+      }
+
       onEdgeRemoved?.Invoke(edge);
-    }
-    
-    /// <summary>
-    /// Checks if this vertex has a neighbor.
-    /// </summary>
-    /// <param name="vertex">The neighbor to check.</param>
-    /// <returns>True if the neighbor exists, false otherwise.</returns>
-    public bool HasNeighbor(GraphVertex<T> vertex)
-    {
-      return neighbors.Contains(vertex);
     }
     
     /// <summary>

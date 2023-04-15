@@ -103,9 +103,10 @@ namespace KalkuzSystems.Utility.Tests
       var graph = new Graph<int>();
       var vertex0 = graph.AddVertex(0, "Vertex 0", 0);
       var vertex1 = graph.AddVertex(1, "Vertex 1", 1);
-      var edges = graph.AddUndirectedEdge(vertex0, vertex1);
-      var edge = edges[0];
-      var oppositeEdge = edges[1];
+      var (edge, oppositeEdge) = graph.AddUndirectedEdge(vertex0, vertex1);
+      
+      Assert.AreEqual(edge, oppositeEdge.UndirectedSibling);
+      Assert.AreEqual(oppositeEdge, edge.UndirectedSibling);
       
       Assert.AreEqual(2, graph.Vertices.Count);
       Assert.AreEqual(2, graph.Edges.Count);
@@ -177,6 +178,87 @@ namespace KalkuzSystems.Utility.Tests
       Assert.IsTrue(vertex0.LoopingEdges.Contains(edge));
       
       Assert.IsTrue(vertex0.HasNeighbor(vertex0));
+      
+      yield return null;
+    }
+    
+    [UnityTest]
+    public IEnumerator TestIntGraphCanAddOneDirectedEdgeAndRemove()
+    {
+      var graph = new Graph<int>();
+      var vertex0 = graph.AddVertex(0, "Vertex 0", 0);
+      var vertex1 = graph.AddVertex(1, "Vertex 1", 1);
+      var edge = graph.AddDirectedEdge(vertex0, vertex1);
+      graph.RemoveEdge(edge);
+      
+      Assert.AreEqual(2, graph.Vertices.Count);
+      Assert.AreEqual(0, graph.Edges.Count);
+      
+      Assert.IsNull(edge.From);
+      Assert.IsNull(edge.To);
+      
+      Assert.IsFalse(vertex0.HasEdge(edge));
+      Assert.IsFalse(vertex1.HasEdge(edge));
+      
+      Assert.IsFalse(vertex0.HasNeighbor(vertex1));
+      Assert.IsFalse(vertex1.HasNeighbor(vertex0));
+      
+      yield return null;
+    }
+    
+    [UnityTest]
+    public IEnumerator TestIntGraphCanAddOneUndirectedEdgeAndRemove()
+    {
+      var graph = new Graph<int>();
+      var vertex0 = graph.AddVertex(0, "Vertex 0", 0);
+      var vertex1 = graph.AddVertex(1, "Vertex 1", 1);
+      var (edge, oppositeEdge) = graph.AddUndirectedEdge(vertex0, vertex1);
+      graph.RemoveEdge(edge);
+      graph.RemoveEdge(oppositeEdge);
+      
+      Assert.IsNull(edge.UndirectedSibling);
+      Assert.IsNull(oppositeEdge.UndirectedSibling);
+      
+      Assert.AreEqual(2, graph.Vertices.Count);
+      Assert.AreEqual(0, graph.Edges.Count);
+      
+      Assert.IsNull(edge.From);
+      Assert.IsNull(edge.To);
+      Assert.IsNull(oppositeEdge.From);
+      Assert.IsNull(oppositeEdge.To);
+      
+      Assert.IsFalse(vertex0.HasEdge(edge));
+      Assert.IsFalse(vertex1.HasEdge(edge));
+      Assert.IsFalse(vertex0.HasEdge(oppositeEdge));
+      Assert.IsFalse(vertex1.HasEdge(oppositeEdge));
+      
+      Assert.IsFalse(vertex0.HasNeighbor(vertex1));
+      Assert.IsFalse(vertex1.HasNeighbor(vertex0));
+      
+      yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator TestIntGraphCanAddTwoVerticesConnectedWithTwoDirectedEdgeAndRemoveOne()
+    {
+      var graph = new Graph<int>();
+      var vertex0 = graph.AddVertex(0, "Vertex 0", 0);
+      var vertex1 = graph.AddVertex(1, "Vertex 1", 1);
+      var edge0 = graph.AddDirectedEdge(vertex0, vertex1);
+      var edge1 = graph.AddDirectedEdge(vertex1, vertex0);
+      graph.RemoveEdge(edge0);
+
+      Assert.AreEqual(2, graph.Vertices.Count);
+      Assert.AreEqual(1, graph.Edges.Count);
+      
+      Assert.IsTrue(vertex0.HasEdge(edge1));
+      Assert.IsTrue(vertex1.HasEdge(edge1));
+      
+      Assert.IsFalse(vertex0.HasEdge(edge0));
+      Assert.IsFalse(vertex1.HasEdge(edge0));
+      
+      Assert.IsFalse(vertex0.HasNeighbor(vertex1));
+      Assert.IsTrue(vertex1.HasNeighbor(vertex0));
       
       yield return null;
     }

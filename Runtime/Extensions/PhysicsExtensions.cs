@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
   public static class PhysicsExtensions
   {

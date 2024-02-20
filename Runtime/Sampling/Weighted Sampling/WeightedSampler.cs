@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
   [Serializable]
   public sealed class WeightedSampler<T>

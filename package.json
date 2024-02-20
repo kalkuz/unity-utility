@@ -4,8 +4,8 @@
   "displayName": "Kalkuz Utility",
   "description": "A utility library for most operations in Unity.",
   "category": "Tools",
-  "unity": "2021.3",
-  "unityRelease": "9f1",
+  "unity": "2022.3",
+  "unityRelease": "10f1",
   "documentationUrl": "",
   "changelogUrl": "",
   "licensesUrl": "",
@@ -18,6 +18,6 @@
   "author": {
     "name": "Oğuzhan Kalkuz",
     "email": "oguzhan@kalkuz.me",
-    "url": ""
+    "url": "https://kalkuz.me"
   }
 }

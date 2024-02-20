@@ -1,6 +1,7 @@
 ﻿using System;
+using UnityEngine;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
   /// <summary>
   /// GraphEdge is an edge in a graph that connects two vertices. It is a directed and weighted edge.
@@ -172,7 +173,7 @@ namespace KalkuzSystems.Utility
     /// <returns>True if the edge is the exact opposite of the other edge, false otherwise.</returns>
     public bool IsOpposite(GraphEdge<T> edge)
     {
-      return IsOppositeDirection(edge) && Math.Abs(weight - edge.weight) < 0.0001f;
+      return IsOppositeDirection(edge) && Mathf.Abs(weight - edge.weight) < 0.0001f;
     }
 
     /// <summary>

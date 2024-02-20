@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
     public static class VectorExtensions
     {
@@ -39,6 +39,10 @@ namespace KalkuzSystems.Utility
             if (angle < 0) angle += 360;
             return angle;
         }
-        
+
+        public static Vector3 Direct(this Vector3 vector, Vector3 direction)
+        {
+            return direction.normalized * vector.magnitude;
+        }
     }
 }

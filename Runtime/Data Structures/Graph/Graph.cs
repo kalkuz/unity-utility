@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
   /// <summary>
   /// Graph is a graph data structure that stores vertices and edges.

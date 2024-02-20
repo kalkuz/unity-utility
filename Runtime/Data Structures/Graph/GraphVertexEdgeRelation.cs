@@ -1,4 +1,4 @@
-﻿namespace KalkuzSystems.Utility
+﻿namespace Kalkuz.Utility
 {
   public enum GraphVertexEdgeRelation
   {

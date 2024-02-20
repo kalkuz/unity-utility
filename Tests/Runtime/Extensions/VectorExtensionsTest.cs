@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
 
-namespace KalkuzSystems.Utility.Tests
+namespace Kalkuz.Utility.Tests
 {
     public class VectorExtensionsTest
     {

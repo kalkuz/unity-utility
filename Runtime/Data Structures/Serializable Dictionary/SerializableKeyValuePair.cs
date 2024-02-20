@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 
-namespace KalkuzSystems.Utility
+namespace Kalkuz.Utility
 {
   [System.Serializable]
   public sealed class SerializableKeyValuePair<TKey, TValue>
   {
-    [SerializeField] private TKey key;
-    [SerializeField] private TValue value;
-    
-    public TKey Key => key;
-    public TValue Value => value;
+    [field: SerializeField] public TKey Key { get; set; }
+    [field: SerializeField] public TValue Value { get; set; }
 
     public SerializableKeyValuePair(TKey key, TValue value)
     {
-      this.key = key;
-      this.value = value;
+      Key = key;
+      Value = value;
     }
   }
 }

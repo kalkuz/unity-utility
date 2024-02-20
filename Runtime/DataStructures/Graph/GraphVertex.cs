@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kalkuz.Utility
+namespace KalkuzSystems.Utility.DataStructures.Graph
 {
   /// <summary>
   /// GraphVertex is a vertex in a graph.

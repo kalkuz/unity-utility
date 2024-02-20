@@ -1,4 +1,4 @@
-﻿namespace Kalkuz.Utility.Math
+﻿namespace KalkuzSystems.Utility.Math
 {
   public struct MathUtility
   {

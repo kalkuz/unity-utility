@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kalkuz.Utility;
+using KalkuzSystems.Utility.DataStructures.SerializableDictionary;
 using UnityEngine;
 
 namespace KalkuzSystems.Utility.TagSystem

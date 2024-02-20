@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Kalkuz.Gameplay
+namespace KalkuzSystems.Utility.Highlighting
 {
   /// <summary>
   ///   Base class for indicating objects.

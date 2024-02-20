@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Kalkuz.Gameplay
+namespace KalkuzSystems.Utility.Highlighting.BlinkHighlighter
 {
   public sealed class SpriteBlinkHighlighter : BlinkHighlighter
   {

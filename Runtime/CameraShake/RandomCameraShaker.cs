@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Kalkuz.Gameplay
+namespace KalkuzSystems.Utility.CameraShake
 {
   public sealed class RandomCameraShaker : CameraShakerBase
   {

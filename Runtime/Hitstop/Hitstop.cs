@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Kalkuz.Gameplay
+namespace KalkuzSystems.Utility.Hitstop
 {
   public sealed class Hitstop : MonoBehaviour
   {
-    private Coroutine doCoroutine;
-    private float timePreviously;
-    public static Hitstop Instance { get; private set; }
+    private static Coroutine m_doCoroutine;
+    private static float m_timePreviously;
+    private static Hitstop Instance { get; set; }
 
     private void Awake()
     {
@@ -15,26 +15,28 @@ namespace Kalkuz.Gameplay
       else Destroy(this);
     }
 
-    public void Do(float duration, float timeScale)
+    public static void Do(float duration, float timeScale)
     {
-      if (doCoroutine != null)
+      if (Instance is null) throw new System.Exception("Hitstop instance not found.");
+      
+      if (m_doCoroutine != null)
       {
-        StopCoroutine(doCoroutine);
-        Time.timeScale = timePreviously;
+        Instance.StopCoroutine(m_doCoroutine);
+        Time.timeScale = m_timePreviously;
       }
 
-      doCoroutine = StartCoroutine(DoCoroutine(duration, timeScale));
+      m_doCoroutine = Instance.StartCoroutine(DoCoroutine(duration, timeScale));
     }
 
-    private IEnumerator DoCoroutine(float duration, float timeScale)
+    private static IEnumerator DoCoroutine(float duration, float timeScale)
     {
-      timePreviously = Time.timeScale;
+      m_timePreviously = Time.timeScale;
 
       Time.timeScale = timeScale;
       yield return new WaitForSeconds(duration);
-      Time.timeScale = timePreviously;
+      Time.timeScale = m_timePreviously;
 
-      doCoroutine = null;
+      m_doCoroutine = null;
     }
   }
 }

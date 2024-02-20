@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Kalkuz.Utility
+namespace KalkuzSystems.Utility.Sampling.WeightedSampling
 {
   [Serializable]
   public sealed class WeightedItem<T>

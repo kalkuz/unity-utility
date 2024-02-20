@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kalkuz.Utility
+namespace KalkuzSystems.Utility.DataStructures.SerializableDictionary
 {
   [System.Serializable]
   public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kalkuz.Utility
+namespace KalkuzSystems.Utility.DataStructures.SerializableDictionary
 {
   [System.Serializable]
   public sealed class SerializableKeyValuePair<TKey, TValue>

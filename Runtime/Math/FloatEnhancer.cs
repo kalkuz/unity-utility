@@ -1,14 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Kalkuz.Utility.Math
+namespace KalkuzSystems.Utility.Math
 {
   public enum FloatEnhancerOrder
   {
-    FLAT,
-    PERCENTAGE,
-    FLAT_THEN_PERCENTAGE,
-    PERCENTAGE_THEN_FLAT
+    [InspectorName("Flat Only")] Flat,
+    [InspectorName("Percentage Only")] Percentage,
+    [InspectorName("First Flat, Then Percentage")] FlatThenPercentage,
+    [InspectorName("First Percentage, Then Flat")] PercentageThenFlat
   }
 
   [Serializable]
@@ -24,20 +24,20 @@ namespace Kalkuz.Utility.Math
       {
         return order switch
         {
-          FloatEnhancerOrder.FLAT => value - flat,
-          FloatEnhancerOrder.PERCENTAGE => value * (1f - percentage),
-          FloatEnhancerOrder.FLAT_THEN_PERCENTAGE => (value - flat) * (1f - percentage),
-          FloatEnhancerOrder.PERCENTAGE_THEN_FLAT => (value * (1f - percentage)) - flat,
+          FloatEnhancerOrder.Flat => value - flat,
+          FloatEnhancerOrder.Percentage => value * (1f - percentage),
+          FloatEnhancerOrder.FlatThenPercentage => (value - flat) * (1f - percentage),
+          FloatEnhancerOrder.PercentageThenFlat => (value * (1f - percentage)) - flat,
           _ => value
         };
       }
 
       return order switch
       {
-        FloatEnhancerOrder.FLAT => value + flat,
-        FloatEnhancerOrder.PERCENTAGE => value * (1f + percentage),
-        FloatEnhancerOrder.FLAT_THEN_PERCENTAGE => (value + flat) * (1f + percentage),
-        FloatEnhancerOrder.PERCENTAGE_THEN_FLAT => (value * (1f + percentage)) + flat,
+        FloatEnhancerOrder.Flat => value + flat,
+        FloatEnhancerOrder.Percentage => value * (1f + percentage),
+        FloatEnhancerOrder.FlatThenPercentage => (value + flat) * (1f + percentage),
+        FloatEnhancerOrder.PercentageThenFlat => (value * (1f + percentage)) + flat,
         _ => value
       };
     }

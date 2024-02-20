@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Kalkuz.Utility
+namespace KalkuzSystems.Utility.DataStructures.Graph
 {
   /// <summary>
   /// GraphEdge is an edge in a graph that connects two vertices. It is a directed and weighted edge.

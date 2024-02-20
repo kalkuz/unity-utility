@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kalkuz.Utility.Math
+namespace KalkuzSystems.Utility.Math
 {
   [Serializable]
   public sealed class MinMaxFloat

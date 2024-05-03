@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KalkuzSystems.Utility.Highlighting.BlinkHighlighter
+namespace Kalkuz.Utility.Highlighting.BlinkHighlighter
 {
   /// <summary>
   ///   Base class for blink indication of objects.

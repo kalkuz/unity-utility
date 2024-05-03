@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KalkuzSystems.Utility.Extensions
+namespace Kalkuz.Utility.Extensions
 {
     public static class VectorExtensions
     {

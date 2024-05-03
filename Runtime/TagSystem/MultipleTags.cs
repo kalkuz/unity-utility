@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KalkuzSystems.Utility.TagSystem
+namespace Kalkuz.Utility.TagSystem
 {
   [Serializable]
   public sealed class MultipleTags : ISerializationCallbackReceiver
@@ -19,6 +19,11 @@ namespace KalkuzSystems.Utility.TagSystem
     public void OnAfterDeserialize()
     {
       HashSet = new HashSet<string>(tags);
+    }
+
+    public bool Contains(string tag)
+    {
+      return HashSet.Contains(tag);
     }
   }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using KalkuzSystems.Utility.DataStructures.SerializableDictionary;
+using Kalkuz.Utility.DataStructures.SerializableDictionary;
 using UnityEngine;
 
-namespace KalkuzSystems.Utility.TagSystem
+namespace Kalkuz.Utility.TagSystem
 {
   [Serializable]
   public sealed class TagSet : Dictionary<string, List<string>>, ISerializationCallbackReceiver

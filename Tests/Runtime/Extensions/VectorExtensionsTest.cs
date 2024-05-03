@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using KalkuzSystems.Utility.Extensions;
+using Kalkuz.Utility.Extensions;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;

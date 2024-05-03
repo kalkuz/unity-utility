@@ -1,4 +1,4 @@
-﻿using KalkuzSystems.Utility.TagSystem;
+﻿using Kalkuz.Utility.TagSystem;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,7 +16,18 @@ namespace Kalkuz.Utility.Editor.TagSystem
 
       if (allOptions.Count == 0)
       {
-        EditorGUILayout.LabelField(label.text, $"No tags found in {tagSelectAttribute.TagGroup}.");
+        var labelRect = new Rect(position.x, position.y, position.width * 0.5f + EditorGUIUtility.labelWidth,
+          position.height);
+        
+        EditorGUI.LabelField(labelRect, label.text, $"No tags found in {tagSelectAttribute.TagGroup}.");
+        
+        var buttonRect = new Rect(position.x + labelRect.width, position.y, position.width * 0.5f - EditorGUIUtility.labelWidth,
+          position.height);
+        if (GUI.Button(buttonRect,"Open"))
+        {
+          TagSettings.OpenTagSettingsWindow();
+        }
+
         return;
       }
 
@@ -88,26 +99,11 @@ namespace Kalkuz.Utility.Editor.TagSystem
           break;
         }
         default:
-          EditorGUILayout.LabelField(label.text, $"Use TagSelect with string or {nameof(MultipleTags)} fields only.");
+          EditorGUI.LabelField(position, label.text, $"Use TagSelect with string or {nameof(MultipleTags)} fields only.");
           return;
       }
 
       property.serializedObject.ApplyModifiedProperties();
-    }
-  }
-
-  public sealed class TagSelectAttribute : PropertyAttribute
-  {
-    public readonly string TagGroup;
-    
-    public TagSelectAttribute()
-    {
-      TagGroup = string.Empty;
-    }
-
-    public TagSelectAttribute(string tagGroup)
-    {
-      TagGroup = tagGroup;
     }
   }
 }

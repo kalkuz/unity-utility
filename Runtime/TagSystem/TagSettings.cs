@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-namespace KalkuzSystems.Utility.TagSystem
+namespace Kalkuz.Utility.TagSystem
 {
   public class TagSettings : ScriptableObject
   {
@@ -12,23 +11,34 @@ namespace KalkuzSystems.Utility.TagSystem
 
     private static TagSettings GetOrCreateSettings()
     {
-      var settings = AssetDatabase.LoadAssetAtPath<TagSettings>(MID_TagSettingsPath);
-      
+#if UNITY_EDITOR
+      var settings = UnityEditor.AssetDatabase.LoadAssetAtPath<TagSettings>(MID_TagSettingsPath);
+
       if (settings is not null) return settings;
-      
+
       settings = CreateInstance<TagSettings>();
 
       settings.tagGroups = new TagSet();
-      
-      AssetDatabase.CreateAsset(settings, MID_TagSettingsPath);
-      AssetDatabase.SaveAssets();
-      
+
+      UnityEditor.AssetDatabase.CreateAsset(settings, MID_TagSettingsPath);
+      UnityEditor.AssetDatabase.SaveAssets();
+#else
+    var settings = Resources.Load<TagSettings>("TagSettings");
+
+    if (settings is not null) return settings;
+
+    throw new System.Exception("TagSettings not found in Resources folder.");
+#endif
+
       return settings;
     }
     
     public static List<string> GetTags(string tagGroup)
     {
-      if (!string.IsNullOrEmpty(tagGroup)) return GetOrCreateSettings().tagGroups[tagGroup];
+      if (!string.IsNullOrEmpty(tagGroup))
+      {
+        return GetOrCreateSettings().tagGroups.TryGetValue(tagGroup, out var tags) ? tags : new List<string>();
+      }
       
       var allTags = new List<string>();
       foreach (var tagGroupValue in GetOrCreateSettings().tagGroups.Values)
@@ -37,25 +47,33 @@ namespace KalkuzSystems.Utility.TagSystem
       }
       return allTags;
     }
-
-    internal static SerializedObject GetSerializedSettings()
+    
+#if UNITY_EDITOR
+    internal static UnityEditor.SerializedObject GetSerializedSettings()
     {
-      return new SerializedObject(GetOrCreateSettings());
+      return new UnityEditor.SerializedObject(GetOrCreateSettings());
     }
+    
+    public static void OpenTagSettingsWindow()
+    {
+      UnityEditor.SettingsService.OpenProjectSettings("Project/Kalkuz/Tag Settings");
+    }
+#endif
   }
-  
+
+#if UNITY_EDITOR
   // Register a SettingsProvider using IMGUI for the drawing framework:
   internal static class TagSettingsProvider
   {
-    [SettingsProvider]
-    public static SettingsProvider CreateMyCustomSettingsProvider()
+    [UnityEditor.SettingsProvider]
+    public static UnityEditor.SettingsProvider CreateMyCustomSettingsProvider()
     {
-      var provider = new SettingsProvider("Project/Kalkuz/Tag Settings", SettingsScope.Project)
+      var provider = new UnityEditor.SettingsProvider("Project/Kalkuz/Tag Settings", UnityEditor.SettingsScope.Project)
       {
         guiHandler = (searchContext) =>
         {
           var settings = TagSettings.GetSerializedSettings();
-          EditorGUILayout.PropertyField(settings.FindProperty("tagGroups"), true);
+          UnityEditor.EditorGUILayout.PropertyField(settings.FindProperty("tagGroups"), true);
           settings.ApplyModifiedProperties();
         },
         keywords = new HashSet<string>(new[] { "Tag", "Settings" })
@@ -64,4 +82,5 @@ namespace KalkuzSystems.Utility.TagSystem
       return provider;
     }
   }
+#endif
 }

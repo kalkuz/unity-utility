@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace KalkuzSystems.Utility.Hitstop
+namespace Kalkuz.Utility.Hitstop
 {
   public sealed class Hitstop : MonoBehaviour
   {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KalkuzSystems.Utility.TagSystem;
+using Kalkuz.Utility.TagSystem;
 using UnityEditor;
 using UnityEngine;
 

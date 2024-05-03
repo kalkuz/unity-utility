@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.kalkuz.utility.Runtime",
-  "rootNamespace": "KalkuzSystems.Utility",
+  "rootNamespace": "Kalkuz.Utility",
   "references": [],
   "includePlatforms": [],
   "excludePlatforms": [],
